@@ -16,14 +16,14 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     InputStream inputStream;
-    Handler handler;
+//    Handler handler;
     TextView tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tv=(TextView)findViewById(R.id.textView);
-        handler=new Handler();
+//        handler=new Handler();
         new Thread(){
             @Override
             public void run(){
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                         sb.append(str);
                     }
                     Log.d("MYNELog", sb.toString());
-                    handler.post(new Runnable() {
+                    runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             tv.setText(sb.toString());
