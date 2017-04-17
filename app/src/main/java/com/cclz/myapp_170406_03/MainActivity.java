@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.xml.sax.InputSource;
@@ -18,6 +20,7 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -27,11 +30,15 @@ public class MainActivity extends AppCompatActivity {
     InputStream inputStream;
     MyDataHandler dataHandler;
     TextView tv;
+    ListView lv;
+    ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tv=(TextView)findViewById(R.id.textView);
+//        tv=(TextView)findViewById(R.id.textView);
+        lv=(ListView)findViewById((R.id.listView));
         dataHandler=new MyDataHandler();
         new Thread(){
             @Override
@@ -61,7 +68,9 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            tv.setText(sb.toString());
+//                            tv.setText(sb.toString());
+                            adapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_expandable_list_item_1,dataHandler.titles);
+                            lv.setAdapter(adapter);
                         }
                     });
 
