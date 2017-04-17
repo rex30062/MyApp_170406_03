@@ -16,13 +16,19 @@ public class MyDataHandler extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         super.startElement(uri, localName, qName, attributes);
-        isTitle=true;
+        if (qName.equals("title")){
+            isTitle=true;
+        }
+
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         super.endElement(uri, localName, qName);
-        isTitle=false;
+        if(qName.equals("title")){
+            isTitle=false;
+        }
+
     }
 
     @Override
