@@ -1,9 +1,12 @@
 package com.cclz.myapp_170406_03;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -71,6 +74,14 @@ public class MainActivity extends AppCompatActivity {
 //                            tv.setText(sb.toString());
                             adapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_expandable_list_item_1,dataHandler.titles);
                             lv.setAdapter(adapter);
+                            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    Intent it = new Intent(MainActivity.this, DetailActivity.class);
+                                    it.putExtra("link", dataHandler.links.get(position));
+                                    startActivity(it);
+                                }
+                            });
                         }
                     });
 
